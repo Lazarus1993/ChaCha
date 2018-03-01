@@ -81,7 +81,7 @@ public class ChaChaImplementation {
 		
 	}
 private static String finalOperation(String plaintext, String finalKey) {
-		
+		//This is an XOR operation
 		StringBuilder sb = new StringBuilder();
 		
 		
