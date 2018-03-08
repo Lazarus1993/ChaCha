@@ -22,13 +22,15 @@ public class ChaChaImplementation {
 		for(int i=0;i<lbwords.length;i++)
 			lbwords[i] = Integer.parseInt(bwords[i], 2);  //converting binary words into int words
 		
-		//rowround
+		int counter = 0;
+		while(counter < 20)
+		{//rowround
 		output = rowRound(output,lbwords);
 		lbwords = output;
-		
 		//columnround
 		output = columnRound(output,lbwords);
-			
+		counter ++;
+		}
 		String finalKey = padding(output);
 		
 		System.out.println("Size of key "+finalKey.length());
@@ -226,10 +228,21 @@ private static String finalOperation(String plaintext, String finalKey) {
 		
 		int[] twords = new int[4];
 		
-		int y1 = x1^(((x0 + x3)%(int)(Math.pow(2, 32))) << 7);
-		int y2 = x2^(((y1 + x0)%(int)(Math.pow(2, 32))) << 9);
-		int y3 = x3^(((y2 + y1)%(int)(Math.pow(2, 32))) << 13);
-		int y0 = x0^(((y3 + y2)%(int)(Math.pow(2, 32))) << 18);
+		int y0 = (x0 + x1)%(int)(Math.pow(2, 32));
+		int y3 = x3^y0;
+		y3 = y3 << 16;
+		
+		int y2 = (x2 + y3)%(int)(Math.pow(2, 32));
+		int y1 = x1^y2;
+		y1 = y1 << 12;
+		
+		y0 = (y0+y1)%(int)(Math.pow(2, 32));
+		y3 = y3^y0;
+		y3 = y3 << 8;
+		
+		y2 = (y2+ y3)%(int)(Math.pow(2, 32));
+		y1 = y1^y2;
+		y1 = y1 << 7;
 		
 		twords[1] = y1;
 		twords[2] = y2;
