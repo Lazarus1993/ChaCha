@@ -109,7 +109,6 @@ private static String finalOperation(String plaintext, String finalKey) {
 	}
 
 	private static int[] columnRound(int[] output, int[] bwords) {
-		System.out.println("Column Round Begins !!!!");
 		int[] tempoutput = new int[4];
 		for(int i=0;i<output.length; i+=4) {
 			
@@ -168,10 +167,6 @@ private static String finalOperation(String plaintext, String finalKey) {
 	}
 
 	private static int[] rowRound(int[] output, int[] bwords) {
-		
-		System.out.println("Row Round Begins !!!!");
-		
-		
 		int[] tempoutput = new int[4];
 		for(int i=0;i<output.length; i+=4) {
 			
